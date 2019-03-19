@@ -9,7 +9,8 @@ html,body{
   
   }
   
-  #wrapper{
+  #second_wrapper{
+    background-color: aliceblue;
     margin:2.5% auto;
     width:960px;
     height: 95%;

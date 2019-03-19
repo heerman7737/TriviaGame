@@ -22,7 +22,7 @@ let questions = [{
 }, {
   question: "What is the religion in the North?",
   answers: ["The Faith of Seven", "The Drowned God", "The Many Faces God", "The Old Ones"],
-  correctAnswer: "THe Old Ones",
+  correctAnswer: "The Old Ones",
 }, {
   question: "What is the largest city in Westeros?",
   answers: ["Old Town", "King's Landing", "Harrenhald", "Lannisport"],
@@ -30,7 +30,7 @@ let questions = [{
 }];
 
 /* exported begin */
-const mainpart = document.querySelector('#quiz-area');
+let mainpart = document.querySelector('#quiz-area');
 let countStartNumber = 30;
 let correct=0;
 let incorrect=0;
@@ -43,13 +43,10 @@ let currentQuestion=0;
 
 
 
-
+counter=countStartNumber;
 function countdown(){
-   
-    counter=countStartNumber;
     counter--;
     document.getElementById('counter-number').innerHTML=counter;
-
     if(counter===0){
         console.log('Time Up');
         timeUp();
@@ -58,8 +55,9 @@ function countdown(){
 
 function loadQuestion(){
     timer=setInterval(countdown,1000);
-    document.getElementById('wrapper').innerHTML='<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>';
-    mainpart.innerHTML=`<h2> ${questions[currentQuestion].question}</h2>`
+    document.getElementById('second_wrapper').innerHTML='<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>';
+    mainpart.innerHTML=`<h2>${questions[currentQuestion].question}</h2>`
+    
     for(let i=0;i<question[currentQuestion].answer.length;i++){
         mainpart.append('<button class="answer-button" id="button"' + 'data-name="' + questions[currentQuestion].answers[i] + '">' + questions[currentQuestion].answers[i]+ '</button>')
     }
