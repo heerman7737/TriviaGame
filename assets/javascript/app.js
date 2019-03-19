@@ -45,9 +45,11 @@ let currentQuestion=0;
 
 
 function countdown(){
+   
     counter=countStartNumber;
     counter--;
     document.getElementById('counter-number').innerHTML=counter;
+
     if(counter===0){
         console.log('Time Up');
         timeUp();
@@ -56,6 +58,7 @@ function countdown(){
 
 function loadQuestion(){
     timer=setInterval(countdown,1000);
+    document.getElementById('wrapper').innerHTML='<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>';
     mainpart.innerHTML=`<h2> ${questions[currentQuestion].question}</h2>`
     for(let i=0;i<question[currentQuestion].answer.length;i++){
         mainpart.append('<button class="answer-button" id="button"' + 'data-name="' + questions[currentQuestion].answers[i] + '">' + questions[currentQuestion].answers[i]+ '</button>')
@@ -135,6 +138,5 @@ function reset(){
 }
 document.getElementsByClassName('answer-button').addEventListener("click",e=>{clicked(e)})
 
-document.getElementById('start').addEventListener("click",e=>{document.getElementById('wrapper').innerHTML='<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>';
-loadQuestion();})
-console.log(document.getElementById('start-over').addEventListener("click",reset))
+
+document.getElementById('start-over').addEventListener("click",reset)
