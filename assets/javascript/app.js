@@ -30,7 +30,7 @@ let questions = [{
 }];
 
 /* exported begin */
-let mainpart = document.querySelector('#quiz-area');
+let mainpart = document.getElementById('questionpart');
 let countStartNumber = 30;
 let correct=0;
 let incorrect=0;
@@ -42,6 +42,20 @@ let currentQuestion=0;
 
 
 
+function loadQuestion(){
+    timer=setInterval(countdown,1000);
+    document.getElementById('second_wrapper').innerHTML='<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>';
+    document.getElementById('questionpart').innerHTML=`<h2>${questions[currentQuestion].question}</h2>`
+    
+    for(let i=0;i<4;i++){
+        let g = document.createElement("button");
+        g.setAttribute("class","answer-button")
+        g.setAttribute("id","button")
+        g.setAttribute("value",`${questions[currentQuestion].answers[i]}`)
+        g.innerHTML=`<h4>${questions[currentQuestion].answers[i]}</h4>`
+        document.getElementById('questionpart').appendChild(g)
+    }
+}
 
 counter=countStartNumber;
 function countdown(){
@@ -53,15 +67,6 @@ function countdown(){
     }
 }
 
-function loadQuestion(){
-    timer=setInterval(countdown,1000);
-    document.getElementById('second_wrapper').innerHTML='<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>';
-    mainpart.innerHTML=`<h2>${questions[currentQuestion].question}</h2>`
-    
-    for(let i=0;i<question[currentQuestion].answer.length;i++){
-        mainpart.append('<button class="answer-button" id="button"' + 'data-name="' + questions[currentQuestion].answers[i] + '">' + questions[currentQuestion].answers[i]+ '</button>')
-    }
-}
 function nextQuestion(){
     counter=countStartNumber;
     document.getElementById('counter-number').innerHTML=counter;
@@ -73,7 +78,7 @@ function timeUp(){
     clearInterval(timer);
     document.getElementById('counter-number').innerHTML=counter;
     mainpart.innerHTML='<h2>Out of Time!</h2>';
-    mainpart.append('<h3>The Correct Answer was: ' + questions[currentQuestion].correctAnswer);
+    mainpart.append('<h3>The Correct Answer was: ' + questions[currentQuestion].correctAnswer+'</h3>');
     if(currentQuestion===questions.length-1){
         setTimeout(results,3*1000);
     }
@@ -92,15 +97,7 @@ function results(){
     mainpart.append('<br><button id="start-over">Start Over?</button>');
 }
 
-function clicked(e){
-    clearInterval(timer);
-    if(e.target.data("name")===questions[currentQuestion].correctAnswer){
-        answeredCorrectly();
-    }
-    else{
-        answeredIncorrectly();
-    }
-}
+
 
 function answeredCorrectly(){
     clearInterval(timer);
@@ -134,7 +131,15 @@ function reset(){
     incorrect=0;
     loadQuestion();
 }
-document.getElementsByClassName('answer-button').addEventListener("click",e=>{clicked(e)})
+document.getElementsByClassName('answer-button').onclick=function clicked(e){
+    clearInterval(timer);
+    if(e.target.value()===questions[currentQuestion].correctAnswer){
+        answeredCorrectly();
+    }
+    else{
+        answeredIncorrectly();
+    }
+}
 
 
-document.getElementById('start-over').addEventListener("click",reset)
+

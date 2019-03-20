@@ -16,7 +16,15 @@ html,body{
     height: 95%;
     box-sizing: border-box;
   }
-  
+ 
+  #questionpart{
+    background-color: aliceblue;
+    margin:2.5% auto;
+    width:960px;
+    height: 95%;
+    box-sizing: border-box;
+  }
+ 
   #wrapper{
     position: relative;
   }
@@ -26,9 +34,8 @@ html,body{
     height:20%;
     margin: 0 auto;
     border:none;
-    cursor: pointer;
-    background:transparent;
-    font-size: 42px;;
+    font-size: 42px;
+    color: blueviolet
   }
   
   img{
