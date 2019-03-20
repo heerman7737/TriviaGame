@@ -39,7 +39,25 @@ let currentQuestion=0;
 
 
 
+// document.getElementsByClassName('answer-button').onclick=function clicked(e){
+//     clearInterval(timer);
+//     if(e.target.value()===questions[currentQuestion].correctAnswer){
+//         answeredCorrectly();
+//     }
+//     else{
+//         answeredIncorrectly();
+//     }
+// }
 
+function clicked(e){
+    clearInterval(timer);
+    if(e.target.value===questions[currentQuestion].correctAnswer){
+        answeredCorrectly();
+    }
+    else{
+        answeredIncorrectly();
+    }
+}
 
 
 function loadQuestion(){
@@ -94,7 +112,6 @@ function results(){
     mainpart.append('<h3>Correct Answers: ' + correct + '</h3>');
     mainpart.append('<h3>Incorrect Answers: ' + incorrect + '</h3>');
     mainpart.append('<h3>Unanswered: ' + (questions.length - (incorrect + correct)) + '</h3>');
-    mainpart.append('<br><button id="start-over">Start Over?</button>');
 }
 
 
@@ -123,23 +140,4 @@ function answeredIncorrectly(){
     }
 
 }
-
-function reset(){
-    currentQuestion=0;
-    counter=countStarNumber;
-    correct=0;
-    incorrect=0;
-    loadQuestion();
-}
-document.getElementsByClassName('answer-button').onclick=function clicked(e){
-    clearInterval(timer);
-    if(e.target.value()===questions[currentQuestion].correctAnswer){
-        answeredCorrectly();
-    }
-    else{
-        answeredIncorrectly();
-    }
-}
-
-
 
